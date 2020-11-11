@@ -1,0 +1,54 @@
+{
+    "name": "amyisme13/laravel-jitsi",
+    "description": "Create and manage Jitsi Meet users & rooms",
+    "keywords": [
+        "amyisme13",
+        "laravel-jitsi"
+    ],
+    "homepage": "https://github.com/amyisme13/laravel-jitsi",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Azmi Makarima",
+            "email": "amy.azmim@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amyisme13\\LaravelJitsi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amyisme13\\LaravelJitsi\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amyisme13\\LaravelJitsi\\LaravelJitsiServiceProvider"
+            ],
+            "aliases": {
+                "LaravelJitsi": "Amyisme13\\LaravelJitsi\\LaravelJitsiFacade"
+            }
+        }
+    }
+}
