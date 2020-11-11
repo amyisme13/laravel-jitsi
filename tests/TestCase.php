@@ -12,6 +12,11 @@ class TestCase extends Orchestra
         parent::setUp();
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->withFactories(__DIR__ . '/factories');
+
+        // Add routes by calling macro
+        $this->app['router']->jitsi();
+        // Refresh named routes
+        $this->app['router']->getRoutes()->refreshNameLookups();
     }
 
     protected function getPackageProviders($app)

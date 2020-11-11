@@ -2,6 +2,7 @@
 
 namespace Amyisme13\LaravelJitsi;
 
+use Amyisme13\LaravelJitsi\Http\Controllers\ViewRoomController;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelJitsiServiceProvider extends ServiceProvider
@@ -55,6 +56,25 @@ class LaravelJitsiServiceProvider extends ServiceProvider
         // Register the main class to use with the facade
         $this->app->singleton('laravel-jitsi', function () {
             return new LaravelJitsi;
+        });
+
+        $this->registerRoutesMacro();
+    }
+
+    /**
+     * Register routes macro.
+     *
+     * @param void
+     * @return  void
+     */
+    protected function registerRoutesMacro()
+    {
+        $router = $this->app['router'];
+
+        $router->macro('jitsi', function () use ($router) {
+            $router
+                ->get('/jitsi/{room?}', ViewRoomController::class)
+                ->name('jitsi.view-room');
         });
     }
 }
