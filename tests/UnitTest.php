@@ -65,7 +65,7 @@ class UnitTest extends TestCase
 
         $this->assertEquals($decoded->iss, 'app-id');
         $this->assertEquals($decoded->aud, 'app-id');
-        $this->assertEquals($decoded->sub, 'https://meet.jit.si');
+        $this->assertEquals($decoded->sub, 'meet.jit.si');
         $this->assertEquals($decoded->room, 'hello-world');
         $this->assertObjectHasAttribute('exp', $decoded);
         $this->assertObjectHasAttribute('user', $decoded);

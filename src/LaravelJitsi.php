@@ -27,7 +27,7 @@ class LaravelJitsi
         $payload = [
             'iss' => config('laravel-jitsi.id'),
             'aud' => config('laravel-jitsi.id'),
-            'sub' => config('laravel-jitsi.url'),
+            'sub' => config('laravel-jitsi.domain'),
             'exp' => now()->addMinutes(5)->timestamp,
             'room' => $room,
             'user' => $user->filter()->all(),

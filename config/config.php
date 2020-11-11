@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'url' => env('JITSI_APP_URL'),
+    'domain' => env('JITSI_APP_DOMAIN'),
     'id' => env('JITSI_APP_ID'),
     'secret' => env('JITSI_APP_SECRET'),
 ];

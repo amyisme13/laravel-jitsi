@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="ie=edge">
     <title>{{ $room }}</title>
     <style>
         body {
@@ -17,9 +19,9 @@
 <body>
     <div id="jitsi-container"></div>
 
-    <script src="{{ config('laravel-jitsi.url') }}/external_api.js"></script>
+    <script src="https://{{ config('laravel-jitsi.domain') }}/external_api.js"></script>
     <script>
-        const domain = "{{ config('laravel-jitsi.url') }}"
+        const domain = "{{ config('laravel-jitsi.domain') }}"
         const options = {
             roomName: "{{ $room }}",
             width: "100%",
