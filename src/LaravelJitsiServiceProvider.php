@@ -15,7 +15,7 @@ class LaravelJitsiServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-jitsi');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-jitsi');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-jitsi');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
@@ -25,9 +25,9 @@ class LaravelJitsiServiceProvider extends ServiceProvider
             ], 'config');
 
             // Publishing the views.
-            /*$this->publishes([
+            $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-jitsi'),
-            ], 'views');*/
+            ], 'views');
 
             // Publishing assets.
             /*$this->publishes([
