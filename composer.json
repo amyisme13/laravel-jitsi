@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^7.1",
+        "firebase/php-jwt": "^5.2",
         "illuminate/support": "^6.0"
     },
     "require-dev": {

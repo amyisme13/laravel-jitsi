@@ -3,6 +3,7 @@
 namespace Amyisme13\LaravelJitsi\Tests;
 
 use Amyisme13\LaravelJitsi\LaravelJitsiFacade;
+use Firebase\JWT\JWT;
 
 class UnitTest extends TestCase
 {
@@ -44,7 +45,43 @@ class UnitTest extends TestCase
     /** @test */
     public function testGenerateJwtContent()
     {
-        // TODO
-        $this->assertTrue(true);
+        $user = factory(User::class)->create([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+        ]);
+
+        $token = LaravelJitsiFacade::generateJwt($user, 'hello-world');
+
+        $decoded = JWT::decode($token, 'my-secret-key', ['HS256']);
+
+        $this->assertEquals($decoded->iss, 'app-id');
+        $this->assertEquals($decoded->aud, 'app-id');
+        $this->assertEquals($decoded->sub, 'https://meet.jit.si');
+        $this->assertEquals($decoded->room, 'hello-world');
+        $this->assertObjectHasAttribute('exp', $decoded);
+        $this->assertObjectHasAttribute('user', $decoded);
+
+        $this->assertEquals($decoded->user->id, $user->id);
+        $this->assertEquals($decoded->user->name, 'Jane Doe');
+        $this->assertEquals($decoded->user->email, 'jane@example.com');
+        // Shouldnt exists when null
+        $this->assertObjectNotHasAttribute('avatar', $decoded->user);
+    }
+
+    /** @test */
+    public function testJitsiAttributesCanBeOverriden()
+    {
+        $user = factory(UserOverride::class)->create([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+        ]);
+
+        $token = LaravelJitsiFacade::generateJwt($user, 'hello-world');
+
+        $decoded = JWT::decode($token, 'my-secret-key', ['HS256']);
+
+        $this->assertEquals($decoded->user->name, 'fake name');
+        $this->assertEquals($decoded->user->email, 'fake-email@example.com');
+        $this->assertEquals($decoded->user->avatar, 'https://picsum.photos/100');
     }
 }

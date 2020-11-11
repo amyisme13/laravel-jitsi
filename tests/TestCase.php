@@ -29,5 +29,9 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+
+        $app['config']->set('laravel-jitsi.url', 'https://meet.jit.si');
+        $app['config']->set('laravel-jitsi.id', 'app-id');
+        $app['config']->set('laravel-jitsi.secret', 'my-secret-key');
     }
 }

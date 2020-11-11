@@ -2,6 +2,7 @@
 
 namespace Amyisme13\LaravelJitsi;
 
+use Firebase\JWT\JWT;
 use Illuminate\Support\Str;
 
 class LaravelJitsi
@@ -12,12 +13,27 @@ class LaravelJitsi
      *
      * @param \Illuminate\Database\Eloquent\Model $user
      * @param string $room will be assigned all (*) when null
-     * @return void
+     * @return string
      */
     public function generateJwt($user, $room = '*')
     {
-        // TODO: Implement jwt
-        return 'jwt';
+        $user = collect([
+            'id' => $user->getKey(),
+            'name' => $user->getJitsiName(),
+            'email' => $user->getJitsiEmail(),
+            'avatar' => $user->getJitsiAvatar(),
+        ]);
+
+        $payload = [
+            'iss' => config('laravel-jitsi.id'),
+            'aud' => config('laravel-jitsi.id'),
+            'sub' => config('laravel-jitsi.url'),
+            'exp' => now()->addMinutes(5)->timestamp,
+            'room' => $room,
+            'user' => $user->filter()->all(),
+        ];
+
+        return JWT::encode($payload, config('laravel-jitsi.secret'));
     }
 
     /**
