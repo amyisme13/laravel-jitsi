@@ -1,11 +1,14 @@
-# Very short description of the package
+# Laravel Jitsi
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amyisme13/laravel-jitsi.svg?style=flat-square)](https://packagist.org/packages/amyisme13/laravel-jitsi)
 [![Build Status](https://img.shields.io/travis/amyisme13/laravel-jitsi/master.svg?style=flat-square)](https://travis-ci.org/amyisme13/laravel-jitsi)
-[![Quality Score](https://img.shields.io/scrutinizer/g/amyisme13/laravel-jitsi.svg?style=flat-square)](https://scrutinizer-ci.com/g/amyisme13/laravel-jitsi)
 [![Total Downloads](https://img.shields.io/packagist/dt/amyisme13/laravel-jitsi.svg?style=flat-square)](https://packagist.org/packages/amyisme13/laravel-jitsi)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+A package to generate view of a Jitsi Meet room using Jitsi Meet IFrame API.
+
+## Jitsi Meet Prerequisites
+
+Your Jitsi Meet host must use the token authentication. Currently this package also require your Jitsi Host to allow anonymous user to join by configuring the anonymousdomain (might change later).
 
 ## Installation
 
@@ -15,19 +18,52 @@ You can install the package via composer:
 composer require amyisme13/laravel-jitsi
 ```
 
-## Usage
+Add these variables to your .env file
 
-``` php
-// Usage description here
+```bash
+# Domain of the jitsi meet instance
+JITSI_APP_DOMAIN=
+# App id
+JITSI_APP_ID=
+# Secret key used to generate jwt
+JITSI_APP_SECRET=
 ```
 
-### Testing
+Add the trait `\Amyisme13\LaravelJitsi\Traits\HasJitsiAttributes` to your **User** model.
 
-``` bash
+```php
+use Amyisme13\LaravelJitsi\Traits\HasJitsiAttributes;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    <...>
+    use HasJitsiAttributes;
+    <...>
+}
+```
+
+## Simple Usage
+
+In your `web.php` route file, call the `jitsi` route macro.
+
+```php
+Route::jitsi();
+```
+
+Then visit `/jitsi/<room name>` to join a conference call. Visiting this url when you are authenticated will set your display name, email, avatar and also grant you the moderator role.
+
+## TODO: More Usage
+
+## Testing
+
+```bash
 composer test
 ```
 
-### Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
@@ -41,8 +77,8 @@ If you discover any security related issues, please email amy.azmim@gmail.com in
 
 ## Credits
 
-- [Azmi Makarima](https://github.com/amyisme13)
-- [All Contributors](../../contributors)
+-   [Azmi Makarima](https://github.com/amyisme13)
+-   [All Contributors](../../contributors)
 
 ## License
 
