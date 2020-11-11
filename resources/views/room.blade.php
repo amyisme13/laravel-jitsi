@@ -10,6 +10,11 @@
     <title>{{ $room }}</title>
     <style>
         body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #jitsi-container {
             height: 100vh;
             width: 100vw;
         }
