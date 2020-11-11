@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.1",
         "firebase/php-jwt": "^5.2",
-        "illuminate/support": "^6.0"
+        "illuminate/support": "~6.0|~7.0|~8.0"
     },
     "require-dev": {
         "orchestra/canvas": "^4.6",
@@ -38,7 +38,6 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
     },
     "config": {
         "sort-packages": true
