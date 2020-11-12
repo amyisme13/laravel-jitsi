@@ -1,0 +1,27 @@
+preset: package
+
+namespace: Amyisme13\LaravelJitsi
+user-auth-provider: App\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: Amyisme13\LaravelJitsi\Console
+
+model:
+  namespace: Amyisme13\LaravelJitsi
+
+provider:
+  namespace: Amyisme13\LaravelJitsi\Providers
+
+testing:
+  namespace: Amyisme13\LaravelJitsi\Tests

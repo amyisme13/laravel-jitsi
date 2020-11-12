@@ -1,8 +1,7 @@
 <?php
 
-/*
- * You can place your custom package configuration in here.
- */
 return [
-
+    'domain' => env('JITSI_APP_DOMAIN'),
+    'id' => env('JITSI_APP_ID'),
+    'secret' => env('JITSI_APP_SECRET'),
 ];
